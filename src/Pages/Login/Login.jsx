@@ -20,20 +20,7 @@ const Login = () => {
     return (
          <div className="min-h-screen bg-[#111827] flex flex-col justify-center items-center px-4">
       {/* Logo + Name */}
-      <div className="flex items-center mb-8">
-        <div className="flex items-center justify-center">
-          {/* Logo Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            className="w-10 h-10 text-[#F97316]"
-            fill="currentColor"
-          >
-            <path d="M10 40 L50 20 L90 40 L50 60 Z M50 60 V80 L90 60 V40 Z" />
-          </svg>
-          <h1 className="text-[#F97316] text-2xl font-bold ml-2">StudyMate</h1>
-        </div>
-      </div>
+    
 
       {/* Card */}
       <div className="bg-[#1F2937] shadow-lg rounded-2xl p-8 w-full max-w-md border border-gray-800">

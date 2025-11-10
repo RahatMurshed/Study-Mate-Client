@@ -1,69 +1,106 @@
-
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import AuthContext from '../../Context/AuthContext';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const link = <>
+       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Home  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
+       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Find Partners  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
+       {user && <>
+       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Create Partner Profile  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
+       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">My Connections  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
+       </>}
+  </>
+
+ const navigate = useNavigate();
+
+   const handleLogout = () => {
+      logOut()
+      .then(() => {
+        navigate('/login');
+
+      })
+      .catch((error) => {
+        console.error("Logout Error:", error);
+      });
+  };
+
+
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#111827]/80 backdrop-blur-md border-b border-gray-800">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#0F172A]/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
+
+        {/* --- LOGO --- */}
+        <div className="flex items-center space-x-2 group">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
-            className="w-8 h-8 text-[#F97316]"
+            className="w-8 h-8 text-[#F97316] group-hover:scale-110 transition-transform duration-300"
             fill="currentColor"
           >
             <path d="M10 40 L50 20 L90 40 L50 60 Z M50 60 V80 L90 60 V40 Z" />
           </svg>
-          <h1 className="text-[#F97316] text-xl font-bold tracking-wide">
+          <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-orange-500 text-xl font-extrabold tracking-wide">
             StudyMate
           </h1>
         </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          <a
-            href="#home"
-            className="text-gray-300 hover:text-[#F97316] transition duration-300"
-          >
-            Home
-          </a>
-          <a
-            href="#partners"
-            className="text-gray-300 hover:text-[#F97316] transition duration-300"
-          >
-            Find Partners
-          </a>
-          <a
-            href="#features"
-            className="text-gray-300 hover:text-[#F97316] transition duration-300"
-          >
-            Features
-          </a>
-          <a
-            href="#contact"
-            className="text-gray-300 hover:text-[#F97316] transition duration-300"
-          >
-            Contact
-          </a>
+        {/* --- DESKTOP MENU --- */}
+        <div className="hidden md:flex items-center space-x-8 text-[15px] font-medium">
+          {link}
         </div>
 
-        {/* Buttons */}
-        <div className="hidden md:flex items-center space-x-4">
-          <Link to='/login' className="text-white font-medium hover:text-[#F97316] transition">
-            Login
-          </Link>
-          <button className="bg-[#F97316] hover:bg-[#F59E0B] text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-[#F97316]/40 transition">
-            Get Started
-          </button>
+        {/* --- AUTH SECTION --- */}
+        <div className="hidden md:flex items-center space-x-5">
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar hover:scale-105 transition"
+              >
+                <div className="w-10 rounded-full ring ring-[#F97316]/40 ring-offset-2">
+                  <img
+                    alt="User Avatar"
+                    src={user.photoURL || "https://cdn-icons-png.flaticon.com/512/8792/8792047.png"}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-[#1E293B] text-gray-200 rounded-xl mt-3 w-52 p-2 shadow-xl border border-white/10 backdrop-blur-lg"
+              >
+                <li><a className="hover:text-[#F97316]">Profile</a></li>
+              
+                <li><button
+                onClick={handleLogout}
+                className="hover:text-[#F97316]">Logout</button></li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link
+                to="/login"
+                className="text-gray-300 hover:text-[#F97316] transition duration-300"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300"
+              >
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* --- MOBILE MENU BUTTON --- */}
         <button
-          className="md:hidden text-gray-300 hover:text-[#F97316]"
+          className="md:hidden text-gray-300 hover:text-[#F97316] transition"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -90,40 +127,40 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* --- MOBILE MENU --- */}
       {isOpen && (
-        <div className="md:hidden bg-[#1F2937] border-t border-gray-800">
-          <div className="flex flex-col items-center space-y-4 py-4">
-            <a
-              href="#home"
-              className="text-gray-300 hover:text-[#F97316] transition duration-300"
-            >
-              Home
-            </a>
-            <a
-              href="#partners"
-              className="text-gray-300 hover:text-[#F97316] transition duration-300"
-            >
-              Find Partners
-            </a>
-            <a
-              href="#features"
-              className="text-gray-300 hover:text-[#F97316] transition duration-300"
-            >
-              Features
-            </a>
-            <a
-              href="#contact"
-              className="text-gray-300 hover:text-[#F97316] transition duration-300"
-            >
-              Contact
-            </a>
-            <button className="text-white font-medium hover:text-[#F97316] transition">
-              Login
-            </button>
-            <button className="bg-[#F97316] hover:bg-[#F59E0B] text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-[#F97316]/40 transition">
-              Get Started
-            </button>
+        <div className="md:hidden bg-[#0F172A]/95 border-t border-white/10 backdrop-blur-lg">
+          <div className="flex flex-col items-center space-y-5 py-5">
+            {["Home", "Find Partners", "Features", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase().replace(" ", "")}`}
+                className="text-gray-300 hover:text-[#F97316] text-lg transition duration-300"
+              >
+                {item}
+              </a>
+            ))}
+            {user ? (
+              <>
+                <a className="text-gray-300 hover:text-[#F97316]">Profile</a>
+                <a className="text-gray-300 hover:text-[#F97316]">Logout</a>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-300 hover:text-[#F97316] transition duration-300"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-5 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/40 hover:shadow-[#F97316]/60 transition-all duration-300"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
