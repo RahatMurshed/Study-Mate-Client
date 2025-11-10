@@ -31,11 +31,10 @@ const HeroBanner = () => {
     dots: true,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 800,
+    autoplaySpeed: 3000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
     pauseOnHover: false,
   };
 
