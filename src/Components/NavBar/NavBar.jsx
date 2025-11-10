@@ -1,38 +1,62 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from "../../Context/AuthContext";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const link = <>
-       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Home  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
-       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Find Partners  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
-       {user && <>
-       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">Create Partner Profile  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
-       <NavLink className="relative text-gray-300 hover:text-white transition duration-300 group">My Connections  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-[#F97316] to-orange-600 group-hover:w-full transition-all duration-300"></span></NavLink>
-       </>}
-  </>
+  
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
-   const handleLogout = () => {
-      logOut()
-      .then(() => {
-        navigate('/login');
-
-      })
-      .catch((error) => {
-        console.error("Logout Error:", error);
-      });
+  const handleLogout = () => {
+    logOut()
+      .then(() => navigate("/login"))
+      .catch((error) => console.error("Logout Error:", error));
   };
 
+ 
 
+  const link = (
+    <>
+      <NavLink
+        to="/"
+        className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+      >
+        Home
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+      </NavLink>
+      <NavLink
+        to="/find-partners"
+        className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+      >
+        Find Partners
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+      </NavLink>
+      {user && (
+        <>
+          <NavLink
+            to="/create-partner-profile"
+            className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+          >
+            Create Partner Profile
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+          </NavLink>
+          <NavLink
+            to="/my-connections"
+            className="relative text-base-content/80 hover:text-base-content transition duration-300 group"
+          >
+            My Connections
+            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-focus group-hover:w-full transition-all duration-300"></span>
+          </NavLink>
+        </>
+      )}
+    </>
+  );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#0F172A]/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20 transition-all duration-300">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-base-100/70 backdrop-blur-xl border-b border-base-content/10 shadow-lg transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-
         {/* --- LOGO --- */}
         <div className="flex items-center space-x-2 group">
           <svg
@@ -65,26 +89,32 @@ const Navbar = () => {
                 <div className="w-10 rounded-full ring ring-[#F97316]/40 ring-offset-2">
                   <img
                     alt="User Avatar"
-                    src={user.photoURL || "https://cdn-icons-png.flaticon.com/512/8792/8792047.png"}
+                    src={
+                      user.photoURL ||
+                      "https://cdn-icons-png.flaticon.com/512/8792/8792047.png"
+                    }
                   />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-[#1E293B] text-gray-200 rounded-xl mt-3 w-52 p-2 shadow-xl border border-white/10 backdrop-blur-lg"
+                className="menu menu-sm dropdown-content bg-base-200 text-base-content rounded-xl mt-3 w-52 p-2 shadow-xl border border-base-content/10 backdrop-blur-lg"
               >
-                <li><a className="hover:text-[#F97316]">Profile</a></li>
-              
-                <li><button
-                onClick={handleLogout}
-                className="hover:text-[#F97316]">Logout</button></li>
+                <li>
+                  <a className="hover:text-[#F97316]">Profile</a>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="hover:text-[#F97316]">
+                    Logout
+                  </button>
+                </li>
               </ul>
             </div>
           ) : (
             <div className="flex items-center space-x-4">
               <Link
                 to="/login"
-                className="text-gray-300 hover:text-[#F97316] transition duration-300"
+                className="text-base-content/80 hover:text-[#F97316] transition duration-300"
               >
                 Login
               </Link>
@@ -96,11 +126,13 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+          {/* --- THEME TOGGLE --- */}
+      <input type="checkbox" value="night" className="toggle theme-controller" />
         </div>
 
         {/* --- MOBILE MENU BUTTON --- */}
         <button
-          className="md:hidden text-gray-300 hover:text-[#F97316] transition"
+          className="md:hidden text-base-content/80 hover:text-[#F97316] transition"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -111,7 +143,12 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
             <svg
@@ -121,35 +158,49 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
       </div>
 
+      
+
       {/* --- MOBILE MENU --- */}
       {isOpen && (
-        <div className="md:hidden bg-[#0F172A]/95 border-t border-white/10 backdrop-blur-lg">
+        <div className="md:hidden bg-base-200 border-t border-base-content/10 backdrop-blur-lg">
           <div className="flex flex-col items-center space-y-5 py-5">
             {["Home", "Find Partners", "Features", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase().replace(" ", "")}`}
-                className="text-gray-300 hover:text-[#F97316] text-lg transition duration-300"
+                className="text-base-content/80 hover:text-[#F97316] text-lg transition duration-300"
               >
                 {item}
               </a>
             ))}
             {user ? (
               <>
-                <a className="text-gray-300 hover:text-[#F97316]">Profile</a>
-                <a className="text-gray-300 hover:text-[#F97316]">Logout</a>
+                <a className="text-base-content/80 hover:text-[#F97316]">
+                  Profile
+                </a>
+                <button
+                  onClick={handleLogout}
+                  className="text-base-content/80 hover:text-[#F97316]"
+                >
+                  Logout
+                </button>
               </>
             ) : (
               <>
                 <Link
                   to="/login"
-                  className="text-gray-300 hover:text-[#F97316] transition duration-300"
+                  className="text-base-content/80 hover:text-[#F97316] transition duration-300"
                 >
                   Login
                 </Link>
