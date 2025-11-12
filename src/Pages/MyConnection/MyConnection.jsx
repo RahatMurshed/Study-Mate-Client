@@ -30,17 +30,17 @@ const MyConnections = () => {
     <div className="min-h-screen bg-base-100 text-base-content py-10 px-4 sm:px-6 lg:px-10 mt-20">
       {/* --- Header --- */}
       <div className="max-w-6xl mx-auto text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-bold flex items-center justify-center gap-3 text-base-content">
+        <h2 className="text-3xl font-bold flex items-center justify-center gap-3 text-base-content">
           <FaUserFriends className="text-[#F97316]" />
           My Connections
         </h2>
-        <p className="text-sm sm:text-base text-base-content/60 mt-2">
+        <p className="text-sm  text-base-content/80 mt-2">
           Manage your study partner requests — update or remove them anytime.
         </p>
       </div>
 
       {/* --- Table for large screens --- */}
-      <div className="hidden sm:block max-w-6xl mx-auto bg-base-200/30 dark:bg-base-300/20 backdrop-blur-xl rounded-2xl border border-base-300 shadow-md overflow-x-auto">
+      <div className="hidden sm:block max-w-6xl mx-auto bg-base-200/30  backdrop-blur-xl rounded-2xl border border-base-300 shadow-md overflow-x-auto">
         <table className="table w-full">
           <thead className="bg-base-200 text-base-content/70 text-xs sm:text-sm uppercase">
             <tr>

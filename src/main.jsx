@@ -11,6 +11,7 @@ import FindPartners from './Pages/FindPartners/FindPartners.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
 import CreateProfile from './Pages/CreateProfile/CreateProfile.jsx';
 import MyConnection from './Pages/MyConnection/MyConnection.jsx';
+import PrivateRoute from './Routes/PrivateRoutes.jsx';
 
 
 
@@ -40,11 +41,15 @@ const router = createBrowserRouter([
 
       {
         path: '/create-partner-profile',
-        Component: CreateProfile,
+        element: <PrivateRoute>
+          <CreateProfile></CreateProfile>
+          </PrivateRoute>,
       },
       {
         path: '/my-connections',
-        Component: MyConnection,
+        element: <PrivateRoute>
+          <MyConnection></MyConnection>
+        </PrivateRoute>,
       },
     
     ]
@@ -56,7 +61,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      
+        <RouterProvider router={router} />
+      
     </AuthProvider>
   </StrictMode>,
 )

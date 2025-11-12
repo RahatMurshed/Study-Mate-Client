@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 
 const Register = () => {
   const {  googleSignIn, setUser, signIn } = useContext(AuthContext);
+
+  const [err, setErr] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
   
 
  const handleLogIn = (e) => { 
@@ -17,12 +21,19 @@ const Register = () => {
     const loggedInUser = result.user;
     setUser(loggedInUser);
     console.log("User logged in successfully:", loggedInUser);
+    setErr(null);
+    navigate(location.state);
+
+
+
   })
   .catch((error)=>{
     console.log("Login Error:", error);
+    setErr("Invalid Email or Password")
   });
 
  }
+ 
 
 
  const handleGoogleLogin = () => {
@@ -30,6 +41,9 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         setUser(result.user);
+        navigate(location.state);
+        
+        
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
@@ -78,7 +92,9 @@ const Register = () => {
               required
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
             />
+            {err? <p className="text-sm text-red-500 font-semibold pt-2">{err}</p> : null}
           </div>
+
 
            {/* Forgot Password */}
           <div className=" text-sm">

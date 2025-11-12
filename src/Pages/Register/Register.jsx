@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 
 const Register = () => {
@@ -8,6 +8,7 @@ const Register = () => {
 
 
   const { createUser, googleSignIn, setUser, profileUpdate } = useContext(AuthContext);
+  const navigate = useNavigate();
 
 
 
@@ -47,6 +48,8 @@ const Register = () => {
 
         setErr(null);
         e.target.reset();
+        navigate('/');
+
 
 
       })
@@ -67,6 +70,7 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         setUser(result.user);
+        navigate('/')
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
