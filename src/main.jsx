@@ -12,6 +12,7 @@ import AuthProvider from './Provider/AuthProvider.jsx';
 import CreateProfile from './Pages/CreateProfile/CreateProfile.jsx';
 import MyConnection from './Pages/MyConnection/MyConnection.jsx';
 import PrivateRoute from './Routes/PrivateRoutes.jsx';
+import PartnerDetails from './Pages/PartnerDetails/PartnerDetails.jsx';
 
 
 
@@ -37,6 +38,12 @@ const router = createBrowserRouter([
         path: '/find-partners',
         loader: ()=>fetch("http://localhost:3000/find-partners"),
         Component: FindPartners,
+      },
+      {
+        path: '/partner-details/:id',
+        element: <PrivateRoute>
+          <PartnerDetails></PartnerDetails>
+        </PrivateRoute>,
       },
 
       {

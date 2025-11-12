@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 text-base-content">
         <FaSpinner className="animate-spin text-4xl text-[#F97316]" />
-        <p className="mt-4 text-base-content/70">Checking authorization...</p>
+        
       </div>
     );
   }

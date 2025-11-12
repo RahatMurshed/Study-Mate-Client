@@ -1,7 +1,12 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { Link } from "react-router";
 
 const PartnerCard = ({ partner }) => {
+
+  
+  
+
   //  Dynamic rating rendering
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => {
@@ -46,15 +51,15 @@ const PartnerCard = ({ partner }) => {
         <div className="flex items-center gap-1 mt-3">
           {renderStars(partner.rating)}
           <span className="text-sm text-base-content dark:text-base-content ml-1">
-            {partner.rating.toFixed(1)}
+            {partner?.rating}
           </span>
         </div>
 
         {/* Button */}
         <div className="card-actions mt-4">
-          <button className="btn w-full rounded-full bg-gradient-to-r from-[#F97316] to-[#ea580c] border-none text-white hover:scale-105 hover:shadow-lg transition-all duration-300">
+          <Link to={`/partner-details/${partner._id}`} className="btn w-full rounded-full bg-gradient-to-r from-[#F97316] to-[#ea580c] border-none text-white hover:scale-105 hover:shadow-lg transition-all duration-300">
             View Profile
-          </button>
+          </Link>
         </div>
       </div>
     </div>

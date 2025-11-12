@@ -1,12 +1,17 @@
 
-import React from "react";
 import { FaSearch, FaSortAmountDown } from "react-icons/fa";
 import { useLoaderData } from "react-router";
 import PartnerCard from "../../Components/ProfileCard/ProfileCard";
 
+
+
 const FindPartners = () => {
 
+
     const allPartners = useLoaderData();
+
+
+    
 
   return (
     <div className="min-h-screen bg-base-100  py-10 pt-30 max-w-7xl  mx-auto px-6">

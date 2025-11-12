@@ -1,10 +1,56 @@
-import React, { use } from "react";
+import React, { use  } from "react";
 import { FaUserPlus } from "react-icons/fa";
 import AuthContext from "../../Context/AuthContext";
+import useAxios from "../../Hooks/UseAxios";
 
 const CreatePartnerProfile = () => {
 
     const {user} = use(AuthContext);
+    const axios = useAxios();
+
+   const handleCreatePartner = (e)=>{
+       e.preventDefault();
+       const name = e.target.name.value;
+       const profileimage = e.target.profileimage.value;
+       const email = e.target.email.value;
+       const partnerCount = e.target.partnerCount.value;
+       const rating = e.target.rating.value;
+       const experienceLevel = e.target.experienceLevel.value;
+       const location = e.target.location.value;
+       const availability = e.target.availability.value;
+       const studyMode = e.target.studyMode.value;
+       const subject = e.target.subject.value;
+
+       const newPartner = {
+        name,
+        profileimage, 
+        subject,
+        studyMode, 
+        availability,
+        location,
+        experienceLevel, 
+        rating, 
+        partnerCount,
+        email
+       }
+
+       console.log(newPartner);
+
+
+     
+
+        axios.post('/create-profile',newPartner)
+        .then(data=>{
+            console.log(data.data);
+        })
+
+    
+
+
+
+
+
+   }
 
   return (
     <div className="min-h-screen flex items-center justify-center mt-10 bg-base-100 text-base-content px-4 py-16">
@@ -18,7 +64,9 @@ const CreatePartnerProfile = () => {
         </p>
 
         {/* --- Form --- */}
-        <form className="space-y-5">
+        <form
+        onSubmit={handleCreatePartner}
+        className="space-y-5">
           {/* Name */}
           <div>
             <label className="block text-sm mb-2 text-base-content/80">Full Name</label>
@@ -55,7 +103,9 @@ const CreatePartnerProfile = () => {
           {/* Study Mode */}
           <div>
             <label className="block text-sm mb-2 text-base-content/80">Study Mode</label>
-            <select className="select select-bordered w-full text-base-content focus:border-[#F97316] focus:outline-none">
+            <select
+            name='studyMode'
+            className="select select-bordered w-full text-base-content focus:border-[#F97316] focus:outline-none">
               <option disabled selected>
                 Select Mode
               </option>
@@ -89,7 +139,9 @@ const CreatePartnerProfile = () => {
           {/* Experience Level */}
           <div>
             <label className="block text-sm mb-2 text-base-content/80">Experience Level</label>
-            <select className="select select-bordered w-full text-base-content focus:border-[#F97316] focus:outline-none">
+            <select 
+            name="experienceLevel"
+            className="select select-bordered w-full text-base-content focus:border-[#F97316] focus:outline-none">
               <option disabled selected>
                 Choose Level
               </option>
@@ -140,7 +192,7 @@ const CreatePartnerProfile = () => {
 
           {/* --- Create Button --- */}
           <button
-            type="button"
+            type="submit"
             className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300 w-full flex items-center justify-center gap-2"
           >
             <FaUserPlus />
