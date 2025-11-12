@@ -100,7 +100,7 @@ const Navbar = () => {
                   <img
                     alt="User Avatar"
                     src={
-                      user.photoURL ||
+                      user?.photoURL ||
                       "https://www.citypng.com/public/uploads/preview/download-profile-user-round-orange-icon-symbol-png-701751695033488zipyc2pvo5.png"
                     }
                   />
@@ -189,15 +189,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center space-y-5 py-5">
            
 
-            {["Home", "Find Partners", "Features", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(" ", "")}`}
-                className="text-base-content/80 hover:text-[#F97316] text-lg transition duration-300"
-              >
-                {item}
-              </a>
-            ))}
+           {link}
             {user ? (
               <>
                 <a className="text-base-content/80 hover:text-[#F97316]">

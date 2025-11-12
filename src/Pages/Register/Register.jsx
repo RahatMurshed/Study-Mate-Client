@@ -4,10 +4,10 @@ import AuthContext from '../../Context/AuthContext';
 
 const Register = () => {
 
-  const [err, setErr] = useState("");
+  const [err, setErr] = useState(null);
 
 
-  const { createUser, googleLogin, setUser, profileUpdate, setLoading } = useContext(AuthContext);
+  const { createUser, googleSignIn, setUser, profileUpdate } = useContext(AuthContext);
 
 
 
@@ -37,7 +37,7 @@ const Register = () => {
           photoURL: photo
         })
 
-        setLoading(true);
+
 
         const createdUser = result.user;
 
@@ -45,15 +45,34 @@ const Register = () => {
         setUser(createdUser);
         console.log("User registered successfully:", createdUser);
 
+        setErr(null);
+        e.target.reset();
+
 
       })
       .catch((error) => {
         console.error("Registration Error:", error);
+
+        setErr("Email is Already in use! Try with another email")
+
       });
 
-    e.target.reset();
+
 
   };
+
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+        setUser(result.user);
+      })
+      .catch((error) => {
+        console.error("Google Login Error:", error);
+      });
+  }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center mt-15 bg-base-100 text-base-content px-4 py-30">
@@ -115,7 +134,7 @@ const Register = () => {
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
             />
             {
-              err? <p className="text-red-500 text-sm">{err}</p>:""
+              err ? <p className="text-red-500 text-sm font-semibold p-1">{err}</p> : null
             }
           </div>
 
@@ -134,7 +153,7 @@ const Register = () => {
 
         {/* --- Google Login --- */}
         <button
-          onClick={googleLogin}
+          onClick={handleGoogleLogin}
           className="btn btn-outline rounded-xl w-full "
         >
           <img

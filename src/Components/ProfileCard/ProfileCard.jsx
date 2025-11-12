@@ -16,7 +16,7 @@ const PartnerCard = ({ partner }) => {
   };
 
   return (
-    <div className="card card-side bg-base-100 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-md hover:shadow-xl hover:-translate-y-[3px] transition-all duration-300 rounded-2xl overflow-hidden group">
+    <div className="card card-side bg-base-100  border border-base-content shadow-md hover:shadow-xl hover:-translate-y-[3px] transition-all duration-300 rounded-2xl overflow-hidden group">
       {/* Left image */}
       <figure className="relative w-40 h-auto overflow-hidden flex-shrink-0">
         <img

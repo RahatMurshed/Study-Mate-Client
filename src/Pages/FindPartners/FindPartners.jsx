@@ -1,10 +1,15 @@
 
 import React from "react";
 import { FaSearch, FaSortAmountDown } from "react-icons/fa";
+import { useLoaderData } from "react-router";
+import PartnerCard from "../../Components/ProfileCard/ProfileCard";
 
 const FindPartners = () => {
+
+    const allPartners = useLoaderData();
+
   return (
-    <div className="min-h-screen bg-base-100 px-4 sm:px-6 lg:px-10 py-10 pt-30 w-9/12 mx-auto">
+    <div className="min-h-screen bg-base-100  py-10 pt-30 max-w-7xl  mx-auto px-6">
       {/* Header */}
       <div className=" mb-8">
         <div className="text-center">
@@ -36,8 +41,8 @@ const FindPartners = () => {
           <div className="join w-80 mx-auto  md:w-90  md:mx-0">
             <input
               type="text"
-              placeholder="Search by name or subject"
-              className="input input-bordered input-sm join-item bg-base-100 w-full"
+              placeholder="Search by subject"
+              className="input border border-base-content input-sm join-item bg-base w-full "
             />
             <button className="btn btn-sm join-item bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white border-none hover:scale-105 transition">
               <FaSearch className="mr-2" /> Search
@@ -47,18 +52,13 @@ const FindPartners = () => {
       </div>
 
       {/* Partner Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid gap-3 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
        
-        {/*  
-            {partners.map((p) => (
-              <PartnerCard key={p.email} partner={p} />
-            ))}
-        */}
+        {
+            allPartners.map(partner=> <PartnerCard key={partner._id} partner={partner}></PartnerCard>)
+        }
 
-        {/* Placeholder cards for layout preview */}
-        <div className="skeleton h-56 w-full rounded-2xl"></div>
-        <div className="skeleton h-56 w-full rounded-2xl"></div>
-        <div className="skeleton h-56 w-full rounded-2xl"></div>
+        
       </div>
 
     
