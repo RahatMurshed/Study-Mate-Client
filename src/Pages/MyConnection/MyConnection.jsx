@@ -40,7 +40,9 @@ const MyConnections = () => {
 
     const handleUpdateConnection = async (e) => {
         e.preventDefault();
-        if (!selectedPartner) return;
+        if (!selectedPartner) {
+            return;
+        }
 
         const updatedData = {
             name: editData.name,
@@ -57,7 +59,8 @@ const MyConnections = () => {
             setSelectedPartner(null);
 
             Swal.fire({ title: 'Updated', text: 'Connection updated successfully.', icon: 'success' });
-        } catch (err) {
+        } 
+        catch (err) {
             console.error(err);
             Swal.fire({ title: 'Error', text: 'Failed to update connection.', icon: 'error' });
         }

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { googleSignIn, setUser, signIn } = useContext(AuthContext);
@@ -27,10 +28,21 @@ const Register = () => {
 
         axios.post('/user', loggedInUser)
 
+        Swal.fire({
+          title: "Congratulation!",
+          text: "Authorization successful!.",
+          icon: "success"
+        });
+
 
       })
       .catch((error) => {
         console.log("Login Error:", error);
+        Swal.fire({
+          title: "Authorization failed!",
+          text: "Invalid Email or Password.",
+          icon: "error"
+        });
         setErr("Invalid Email or Password")
       });
 
@@ -48,10 +60,22 @@ const Register = () => {
 
         axios.post('/user', result.user)
 
+        Swal.fire({
+          title: "Congratulation!",
+          text: "Authorization successful!.",
+          icon: "success"
+        });
+
 
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
+
+        Swal.fire({
+          title: "Sorry",
+          text: "Authorization failed!.",
+          icon: "error"
+        });
       });
   }
 

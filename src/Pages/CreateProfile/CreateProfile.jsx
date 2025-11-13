@@ -45,7 +45,7 @@ const CreatePartnerProfile = () => {
         Swal.fire({
       position: "center",
       icon: "success",
-      title: "Your work has been saved",
+      title: "Your profile has been saved",
       showConfirmButton: false,
       timer: 1500
     });

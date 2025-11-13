@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
 import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
   const [err, setErr] = useState(null);
 
- const axios = useAxios();
+  const axios = useAxios();
   const { createUser, googleSignIn, setUser, profileUpdate } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -55,9 +56,21 @@ const Register = () => {
 
 
 
+        Swal.fire({
+          title: "Congratulation!",
+          text: "Authorization successful!.",
+          icon: "success"
+        });
+
+
       })
       .catch((error) => {
         console.error("Registration Error:", error);
+        Swal.fire({
+          title: "Sorry",
+          text: "Email is Already in use!.",
+          icon: "error"
+        });
 
         setErr("Email is Already in use! Try with another email")
 
@@ -77,11 +90,23 @@ const Register = () => {
 
         axios.post('/user', result.user)
 
-       
+        Swal.fire({
+          title: "Congratulation!",
+          text: "Authorization successful!.",
+          icon: "success"
+        });
+
+
 
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
+
+        Swal.fire({
+          title: "Sorry",
+          text: "Authorization failed!.",
+          icon: "error"
+        });
       });
   }
 
