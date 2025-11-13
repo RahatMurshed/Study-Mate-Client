@@ -14,8 +14,7 @@ const CreatePartnerProfile = () => {
     const name = e.target.name.value;
     const profileimage = e.target.profileimage.value;
     const email = e.target.email.value;
-    const partnerCount = e.target.partnerCount.value;
-    const rating = e.target.rating.value;
+    const rating = Number(e.target.rating.value);
     const experienceLevel = e.target.experienceLevel.value;
     const location = e.target.location.value;
     const availability = e.target.availability.value;
@@ -31,7 +30,7 @@ const CreatePartnerProfile = () => {
       location,
       experienceLevel,
       rating,
-      partnerCount,
+      partnerCount: 0,
       email
     }
 
@@ -54,11 +53,6 @@ const CreatePartnerProfile = () => {
       .catch(err=>{
         console.log(err.message);
       })
-
-
-
-   
-
 
 
 
@@ -123,7 +117,7 @@ const CreatePartnerProfile = () => {
                 Select Mode
               </option>
               <option>Online</option>
-              <option>In-person</option>
+              <option>Offline</option>
             </select>
           </div>
 

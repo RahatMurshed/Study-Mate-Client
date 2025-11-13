@@ -258,7 +258,7 @@ const MyConnections = () => {
                                                     onChange={(e) => setEditData(prevData => ({ ...prevData, studyMode: e.target.value }))}
                                                     className="select select-bordered w-full focus:border-[#F97316] focus:outline-none">
                                                     <option>Online</option>
-                                                    <option>In-Person</option>
+                                                    <option>Offline</option>
                                                 </select>
                                             </div>
 
