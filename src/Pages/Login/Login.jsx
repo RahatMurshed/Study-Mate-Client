@@ -53,7 +53,7 @@ const Register = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user);
+        console.log(result);
         setUser(result.user);
         navigate(location.state || "/");
 
@@ -87,7 +87,7 @@ const Register = () => {
 
         {/* --- Header --- */}
         <h2 className="text-3xl font-semibold text-center mb-2 text-base-content">
-          Create Your Account
+          Login to Your Account
         </h2>
         <p className="text-center text-base-content/60 mb-8 text-sm">
           Join StudyMate and find your perfect study partner!
@@ -140,7 +140,7 @@ const Register = () => {
             type="submit"
             className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-xl font-semibold shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300 w-full"
           >
-            Register
+            Login
           </button>
         </form>
 
@@ -164,7 +164,7 @@ const Register = () => {
         <p className="text-center text-sm text-base-content/60 mt-6">
           Does'nt have an account?{" "}
           <Link
-            to="/login"
+            to="/register"
             className="text-[#F97316] hover:text-orange-700 font-medium transition"
           >
             Register here

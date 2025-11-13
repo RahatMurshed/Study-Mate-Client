@@ -1,4 +1,5 @@
 import { Facebook, Linkedin, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "react-router";
 
 const XIcon = () => (
   <svg
@@ -17,8 +18,20 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
         
         {/* Brand Section */}
-        <div>
-          <h2 className="text-2xl font-bold text-[#F97316] mb-3">StudyMate</h2>
+        <div >
+          
+          <Link to='/'>
+          <h2 className="text-2xl flex items-center  font-bold text-[#F97316] mb-3"><span>
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            className="w-8 h-8 text-[#F97316] group-hover:scale-110 transition-transform duration-300"
+            fill="currentColor"
+          >
+            <path d="M10 40 L50 20 L90 40 L50 60 Z M50 60 V80 L90 60 V40 Z" />
+          </svg>
+            </span> StudyMate</h2>
+          </Link>
           <p className="text-sm text-base-content/70 leading-relaxed">
             Empowering learners to connect, collaborate, and grow together. 
             Find your perfect study partner and achieve more — together.
@@ -26,16 +39,16 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex space-x-3 mt-5">
-            <a href="#" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://www.facebook.com/groups/phweb12?checkpoint_src=any" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <Facebook className="w-5 h-5 text-[#F97316]" />
             </a>
-            <a href="#" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://x.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <XIcon />
             </a>
-            <a href="#" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://www.linkedin.com/in/rahat-murshed-62434b369/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <Linkedin className="w-5 h-5 text-[#F97316]" />
             </a>
-            <a href="#" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://www.instagram.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <Instagram className="w-5 h-5 text-[#F97316]" />
             </a>
           </div>

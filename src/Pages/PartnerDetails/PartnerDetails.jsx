@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { use, useEffect } from "react";
 
 import { FaSpinner } from "react-icons/fa";
@@ -71,7 +71,7 @@ const PartnerDetails = () => {
         Swal.fire({
             position: "center",
             icon: "success",
-            title: "Your work has been saved",
+            title: "Your connection has been sent!",
             showConfirmButton: false,
             timer: 1500
         });
@@ -132,15 +132,20 @@ const PartnerDetails = () => {
                         <button
                             onClick={handlePartnerCount}
 
-                            className="btn w-full sm:w-auto bg-[#F97316] border-none hover:bg-[#ea580c] text-white font-semibold rounded-lg px-6 transition-all duration-300"
+                            className="btn w-full sm:w-full bg-[#F97316] border-none hover:bg-[#ea580c] text-white font-semibold rounded-lg px-6 transition-all duration-300"
 
                         >
                             Send Partner Request
                         </button>
                     </div>
+                    <Link to={-1} className="btn btn-outline border-orange-500 text-base-content hover:bg-base-300">Back</Link>
+                    
                 </div>
+                
             </div>
+            
         </div>
+        
     );
 };
 

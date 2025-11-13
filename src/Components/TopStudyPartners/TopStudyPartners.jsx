@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import useAxios from "../../Hooks/useAxios";
 
 
 const TopStudyPartners = () => {
   const [partners, setPartners] = useState([]);
+  const axios = useAxios();
 
   useEffect(() => {
-    fetch("http://localhost:3000/top-partners")
-      .then((res) => res.json())
-      .then((data) => setPartners(data))
+    axios.get('/top-partners')
+   
+      .then((data) => setPartners(data.data))
       .catch((err) => console.error("Error fetching partners:", err));
-  }, [setPartners]);
+  }, [setPartners, axios]);
 
 
   return (

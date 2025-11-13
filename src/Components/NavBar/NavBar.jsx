@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import AuthContext from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,7 +12,14 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut()
-      .then(() => navigate("/login"))
+      .then(() => {
+        navigate("/login")
+        Swal.fire({
+          title: "Logged out!",
+          text: "Successfully logged out!!.",
+          icon: "success"
+        });
+      })
       .catch((error) => console.error("Logout Error:", error));
   };
 
@@ -67,6 +75,7 @@ const Navbar = () => {
 {/* --- THEME TOGGLE --- */}
       <input type="checkbox" value="night" className="toggle theme-controller" />
 
+          <Link to='/' className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
@@ -78,6 +87,7 @@ const Navbar = () => {
           <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-orange-500 text-xl font-extrabold tracking-wide">
             StudyMate
           </h1>
+          </Link>
         </div>
 
         
