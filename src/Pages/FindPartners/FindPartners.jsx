@@ -1,14 +1,29 @@
 
 import { FaSearch, FaSortAmountDown } from "react-icons/fa";
-import { useLoaderData } from "react-router";
 import PartnerCard from "../../Components/ProfileCard/ProfileCard";
+import { useEffect, useState } from "react";
+import useAxios from "../../Hooks/useAxios";
 
 
 
 const FindPartners = () => {
+  const axios = useAxios();
+  const [partners, setPartners] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState('asc');
 
 
-    const allPartners = useLoaderData();
+
+
+useEffect(()=>{
+
+  axios.get(`/find-partners?search=${search}&sort=${sort}`)
+  .then(data =>{
+    setPartners(data.data);
+  })
+
+
+},[search, sort, axios])
 
 
     
@@ -33,11 +48,14 @@ const FindPartners = () => {
             <FaSortAmountDown className="text-[#F97316]" />
             <select
               className="select select-sm bg-base border-none focus:outline-none font-medium"
-              defaultValue="rating-desc"
+              value={sort}
+              onChange={(e)=>{
+                setSort(e.target.value)
+              }}
             >
-              <option value="rating-desc">Top Rated</option>
-              <option value="rating-asc">Lowest Rated</option>
-              <option value="experience">Experience Level</option>
+              <option value="desc">High</option>
+              <option value="asc">Low</option>
+              
              
             </select>
           </div>
@@ -47,6 +65,10 @@ const FindPartners = () => {
             <input
               type="text"
               placeholder="Search by subject"
+              value={search}
+              onChange={(e)=>{
+                setSearch(e.target.value)
+              }}
               className="input border border-base-content input-sm join-item bg-base w-full "
             />
             <button className="btn btn-sm join-item bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white border-none hover:scale-105 transition">
@@ -58,12 +80,11 @@ const FindPartners = () => {
 
       {/* Partner Cards Grid */}
       <div className="grid gap-3 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-       
-        {
-            allPartners.map(partner=> <PartnerCard key={partner._id} partner={partner}></PartnerCard>)
-        }
-
-        
+        {partners.length === 0 ? (
+          <div className="col-span-full text-center text-base-content/70 py-8">No partners found.</div>
+        ) : (
+          partners.map(partner=> <PartnerCard key={partner._id} partner={partner}></PartnerCard>)
+        )}
       </div>
 
     

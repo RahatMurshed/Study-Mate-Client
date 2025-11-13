@@ -2,13 +2,14 @@ import { useParams } from "react-router";
 import { use, useEffect } from "react";
 
 import { FaSpinner } from "react-icons/fa";
-import useAxios from "../../Hooks/UseAxios";
+import useAxios from "../../Hooks/useAxios";
 import AuthContext from "../../Context/AuthContext";
+import Swal from "sweetalert2";
 
 const PartnerDetails = () => {
     const { id } = useParams();
-    const {user} = use(AuthContext);
-   
+    const { user } = use(AuthContext);
+
     const { partner, setPartner } = use(AuthContext)
 
 
@@ -40,13 +41,13 @@ const PartnerDetails = () => {
     const handlePartnerCount = async () => {
 
         const myConnection = {
-            partnerId:partner._id,
+            partnerId: partner._id,
             name: partner.name,
-            email:user.email,
+            email: user.email,
             profileimage: partner.profileimage,
             subject: partner.subject,
             studyMode: partner.studyMode,
-            patnerCount: partner.patnerCount
+            partnerCount: partner.partnerCount
 
         }
 
@@ -59,11 +60,21 @@ const PartnerDetails = () => {
 
 
 
-        await axios.patch(`/increament/${id}`,{change:1})
+        await axios.patch(`/updateCount/${id}`, { change: 1 })
             .then(data => {
                 console.log('After Update: ', data.data)
-                setPartner({ ...partner, patnerCount: partner.patnerCount + 1 })
+                setPartner({ ...partner, partnerCount: partner.partnerCount + 1 })
             })
+
+
+            
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+        });
     }
 
     return (
@@ -105,7 +116,7 @@ const PartnerDetails = () => {
                         </p>
                         <p>
                             <span className="font-semibold">👥 Partner Count:</span>{" "}
-                            {partner.patnerCount}
+                            {partner.partnerCount}
                         </p>
                         <p>
                             <span className="font-semibold">🧑‍💻 Study Mode:</span>{" "}

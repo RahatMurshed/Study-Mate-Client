@@ -36,7 +36,6 @@ const router = createBrowserRouter([
      
       {
         path: '/find-partners',
-        loader: ()=>fetch("http://localhost:3000/find-partners"),
         Component: FindPartners,
       },
       {

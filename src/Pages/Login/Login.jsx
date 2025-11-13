@@ -1,57 +1,62 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
+import useAxios from "../../Hooks/useAxios";
 
 const Register = () => {
-  const {  googleSignIn, setUser, signIn } = useContext(AuthContext);
-
+  const { googleSignIn, setUser, signIn } = useContext(AuthContext);
+  const axios = useAxios();
   const [err, setErr] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  
-
- const handleLogIn = (e) => { 
-  e.preventDefault();
-  const email = e.target.email.value;
-  const password = e.target.password.value;
-  console.log(email, password);
-
-  signIn(email, password)
-  .then((result)=>{
-    const loggedInUser = result.user;
-    setUser(loggedInUser);
-    console.log("User logged in successfully:", loggedInUser);
-    setErr(null);
-    navigate(location.state);
 
 
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
 
-  })
-  .catch((error)=>{
-    console.log("Login Error:", error);
-    setErr("Invalid Email or Password")
-  });
+    signIn(email, password)
+      .then((result) => {
+        const loggedInUser = result.user;
+        setUser(loggedInUser);
+        console.log("User logged in successfully:", loggedInUser);
+        setErr(null);
+        navigate(location.state || '/');
 
- }
- 
+        axios.post('/user', loggedInUser)
 
 
- const handleGoogleLogin = () => {
+      })
+      .catch((error) => {
+        console.log("Login Error:", error);
+        setErr("Invalid Email or Password")
+      });
+
+  }
+
+
+
+  const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
         console.log(result.user);
         setUser(result.user);
-        navigate(location.state);
-        
-        
+        navigate(location.state || "/");
+
+
+        axios.post('/user', result.user)
+
+
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
       });
-    }
- 
+  }
 
-  
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-100 text-base-content px-4 py-30">
       <div className="w-full max-w-lg bg-[#ffffff18] backdrop-blur-xl rounded-2xl border border-base-300 shadow-lg p-8">
@@ -66,7 +71,7 @@ const Register = () => {
 
         {/* --- Form --- */}
         <form onSubmit={handleLogIn} className="space-y-5">
-          
+
 
           {/* Email */}
           <div>
@@ -80,7 +85,7 @@ const Register = () => {
             />
           </div>
 
-          
+
 
           {/* Password */}
           <div>
@@ -92,11 +97,11 @@ const Register = () => {
               required
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
             />
-            {err? <p className="text-sm text-red-500 font-semibold pt-2">{err}</p> : null}
+            {err ? <p className="text-sm text-red-500 font-semibold pt-2">{err}</p> : null}
           </div>
 
 
-           {/* Forgot Password */}
+          {/* Forgot Password */}
           <div className=" text-sm">
             <a
               href="#"

@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import AuthContext from '../../Context/AuthContext';
+import useAxios from "../../Hooks/useAxios";
 
 const Register = () => {
 
   const [err, setErr] = useState(null);
 
-
+ const axios = useAxios();
   const { createUser, googleSignIn, setUser, profileUpdate } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -50,6 +51,8 @@ const Register = () => {
         e.target.reset();
         navigate('/');
 
+        axios.post('/user', createUser);
+
 
 
       })
@@ -71,6 +74,11 @@ const Register = () => {
         console.log(result.user);
         setUser(result.user);
         navigate('/')
+
+        axios.post('/user', result.user)
+
+       
+
       })
       .catch((error) => {
         console.error("Google Login Error:", error);
