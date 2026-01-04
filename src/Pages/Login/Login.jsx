@@ -103,6 +103,7 @@ const Register = () => {
             <input
               type="email"
               name="email"
+              defaultValue='studymate@test.com'
               placeholder="you@example.com"
               required
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
@@ -117,6 +118,7 @@ const Register = () => {
             <input
               type="password"
               name="password"
+              defaultValue='123456rR@'
               placeholder="Enter your password"
               required
               className="input input-bordered w-full text-base-content focus:border-primary focus:outline-none"
