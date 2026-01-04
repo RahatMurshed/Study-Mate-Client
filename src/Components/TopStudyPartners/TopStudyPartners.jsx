@@ -27,7 +27,7 @@ const TopStudyPartners = () => {
           collaborate, and grow together.
         </p>
 
-        <div className="grid gap-3 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {partners.map((partner) => (
             <ProfileCard key={partner._id} partner={partner}></ProfileCard>
           ))}

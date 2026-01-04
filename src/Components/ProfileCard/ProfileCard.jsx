@@ -35,12 +35,12 @@ const PartnerCard = ({ partner }) => {
       {/* Content */}
       <div className="card-body px-5 py-5 flex flex-col justify-between">
         <div className="space-y-1.5 text-left">
-          <h2 className="card-title text-lg font-semibold text-base-content dark:text-white leading-snug">
+          <h2 className="card-title text-lg font-semibold text-base-content  leading-snug">
             {partner.name}
           </h2>
-          <p className="text-sm text-base-content dark:text-gray-400">{partner.subject}</p>
+          <p className="text-sm text-base-content">{partner.subject}</p>
           <p className="text-sm text-base-content dark:text-base-content">
-            Level: <span className="font-medium">{partner.experienceLevel}</span>
+           Experience Level: <span className="font-medium">{partner.experienceLevel}</span>
           </p>
           <p className="text-sm text-base-content dark:text-base-content">
             Study Mode: <span className="font-medium">{partner.studyMode}</span>

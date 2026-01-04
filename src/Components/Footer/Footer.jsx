@@ -39,13 +39,13 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex space-x-3 mt-5">
-            <a href="https://www.facebook.com/groups/phweb12?checkpoint_src=any" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://www.facebook.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <Facebook className="w-5 h-5 text-[#F97316]" />
             </a>
             <a href="https://x.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <XIcon />
             </a>
-            <a href="https://www.linkedin.com/in/rahat-murshed-62434b369/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
+            <a href="https://www.linkedin.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
               <Linkedin className="w-5 h-5 text-[#F97316]" />
             </a>
             <a href="https://www.instagram.com/" target="blank" className="p-2 rounded-full bg-base-200 hover:bg-[#F97316]/20 transition">
@@ -60,7 +60,7 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-base-content/70">
             <li><a href="/" className="hover:text-[#F97316] transition">Home</a></li>
             <li><a href="/find-partners" className="hover:text-[#F97316] transition">Find Partners</a></li>
-            <li><a href="/create-profile" className="hover:text-[#F97316] transition">Create Profile</a></li>
+            <li><a href="/create-partner-profile" className="hover:text-[#F97316] transition">Create Profile</a></li>
             <li><a href="/my-connections" className="hover:text-[#F97316] transition">My Connections</a></li>
           </ul>
         </div>
@@ -69,9 +69,9 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-semibold mb-4">Support</h2>
           <ul className="space-y-2 text-sm text-base-content/70">
-            <li><a href="/help" className="hover:text-[#F97316] transition">Help Center</a></li>
-            <li><a href="/privacy" className="hover:text-[#F97316] transition">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-[#F97316] transition">Terms & Conditions</a></li>
+       
+            <li><a href="/privacy-policy" className="hover:text-[#F97316] transition">Privacy Policy</a></li>
+            <li><a href="/terms-and-conditions" className="hover:text-[#F97316] transition">Terms & Conditions</a></li>
             <li><a href="/contact" className="hover:text-[#F97316] transition">Contact Us</a></li>
           </ul>
         </div>

@@ -29,32 +29,40 @@ const Navbar = () => {
     <>
       <NavLink
         to="/"
-        className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
+        className="relative text-base-content lg:text-xl font-semibold hover:text-orange-400 transition duration-300 group"
       >
         Home
         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
       </NavLink>
       <NavLink
         to="/find-partners"
-        className="relative text-base-content lg:text-xl font-bold hover:text-orange-500 transition duration-300 group"
+        className="relative text-base-content lg:text-xl font-semibold hover:text-orange-500 transition duration-300 group"
       >
         Find Partners
         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
       </NavLink>
+      <NavLink
+        to="/about"
+        className="relative text-base-content lg:text-xl font-semibold hover:text-orange-500 transition duration-300 group"
+      >
+        About
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className="relative text-base-content lg:text-xl font-semibold hover:text-orange-500 transition duration-300 group"
+      >
+        Contact
+        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
+      </NavLink>
       {user && (
         <>
+      
           <NavLink
-            to="/create-partner-profile"
-            className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
+            to="/dashboard/overview"
+            className="relative text-base-content lg:text-xl font-semibold hover:text-orange-400 transition duration-300 group"
           >
-            Create Partner Profile
-            <span className="absolute bg-[#F97316] left-0 -bottom-1 w-0 h-0.5  group-hover:w-full transition-all duration-300"></span>
-          </NavLink>
-          <NavLink
-            to="/my-connections"
-            className="relative text-base-content lg:text-xl font-bold hover:text-orange-400 transition duration-300 group"
-          >
-            My Connections
+            Dashboard
             <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#F97316] group-hover:w-full transition-all duration-300"></span>
           </NavLink>
         </>

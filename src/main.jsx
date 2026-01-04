@@ -1,27 +1,32 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router';
-import RootLayout from './RootLayout/RootLayout.jsx';
+import RootLayout from './Layout/RootLayout.jsx'
 import Home from './Pages/Home/Home.jsx';
 import Register from './Pages/Register/Register.jsx';
 import Login from './Pages/Login/Login.jsx';
 import FindPartners from './Pages/FindPartners/FindPartners.jsx';
 import AuthProvider from './Provider/AuthProvider.jsx';
-import CreateProfile from './Pages/CreateProfile/CreateProfile.jsx';
-import MyConnection from './Pages/MyConnection/MyConnection.jsx';
 import PrivateRoute from './Routes/PrivateRoutes.jsx';
 import PartnerDetails from './Pages/PartnerDetails/PartnerDetails.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import NotFound from './Components/NoFound/NoFound.jsx';
+import About from './Pages/About/About.jsx';
+import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy.jsx';
+import TermsAndConditions from './Pages/TermsAndConditions/TermsAndConditions.jsx';
+import Contact from './Pages/Contact/Contact.jsx';
+import DashboardLayout from './Layout/DashboardLayout.jsx';
+import DashboardHome from './Pages/DashboardHome/DashboardHome.jsx';
+import MyConnections from './Pages/MyConnection/MyConnection.jsx';
+import CreatePartnerProfile from './Pages/CreateProfile/CreateProfile.jsx';
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component : RootLayout,
+    Component: RootLayout,
     children: [
       {
         index: true,
@@ -35,6 +40,22 @@ const router = createBrowserRouter([
         path: '/register',
         Component: Register,
       },
+      {
+        path: '/about',
+        Component: About,
+      },
+      {
+        path: '/privacy-policy',
+        Component: PrivacyPolicy,
+      },
+      {
+        path: '/contact',
+        Component: Contact,
+      },
+      {
+        path: '/terms-and-conditions',
+        Component: TermsAndConditions,
+      },
      
       {
         path: '/find-partners',
@@ -42,24 +63,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/partner-details/:id',
-        element: <PrivateRoute>
-          <PartnerDetails></PartnerDetails>
-        </PrivateRoute>,
+        element: <PartnerDetails></PartnerDetails>,
       },
 
-      {
-        path: '/create-partner-profile',
-        element: <PrivateRoute>
-          <CreateProfile></CreateProfile>
-          </PrivateRoute>,
-      },
-      {
-        path: '/my-connections',
-       
-        element: <PrivateRoute>
-          <MyConnection></MyConnection>
-        </PrivateRoute>,
-      },
       {
         path: '/profile',
        
@@ -74,6 +80,26 @@ const router = createBrowserRouter([
     
     ]
   },
+  {
+    path: '/dashboard',
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    children:[
+      {
+        path:'/dashboard/overview',
+        Component:DashboardHome
+      },
+      {
+        path: '/dashboard/my-connections',
+        Component: MyConnections
+      },
+      {
+        path: '/dashboard/create-partner-profile',
+        Component: CreatePartnerProfile
+      }
+    ]
+  }
 ]);
 
 

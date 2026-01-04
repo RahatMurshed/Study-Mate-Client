@@ -10,17 +10,20 @@ const HeroBanner = () => {
     {
       title: "Find Your Perfect Study Partner",
       desc: "Connect with learners who share your goals, subjects, and study styles. Collaborate, grow, and achieve more together!",
+      link: '/find-partners',
       img: "https://images.stockcake.com/public/4/9/5/495af026-bda2-4f1a-91f0-aaa298aff36a_large/students-studying-together-stockcake.jpg",
       cta: "Find Partners",
     },
     {
-      title: "Collaborate Anytime, Anywhere",
-      desc: "Join or create virtual study rooms, share resources, and track your learning progress in real time.",
-      img: "https://www.mcollins.com/wp-content/uploads/2025/04/Depositphotos_129750380_XL-scaled.jpg",
+      title: "Teach Anytime, Anywhere",
+      desc: "Join as a teacher.Share your knowledge, inspire learners everywhere. With StudyMate, you can become part of a global teaching community without leaving your home.",
+      link: '/create-partner-profile',
+      img: "https://media.istockphoto.com/id/1223604450/photo/cheerful-professor-communicate-with-pupils-over-video-call.jpg?s=612x612&w=0&k=20&c=2yXLsSpsJvIrJao-mVUl88BpKeoNd4Dl93ls23hn0j0=",
       cta: "Create Profile",
     },
     {
       title: "Grow Together, Learn Faster",
+      link: '/register',
       desc: "Build lasting academic connections, boost motivation, and make learning a fun shared experience.",
       img: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1200&q=80",
       cta: "Get Started",
@@ -31,7 +34,7 @@ const HeroBanner = () => {
     dots: true,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -51,7 +54,7 @@ const HeroBanner = () => {
               }}
             >
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#111827]/80 via-[#111827]/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#111827]/80 via-[#111827]/80 to-transparent"></div>
 
               {/* Content */}
               <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 text-center md:text-left">
@@ -62,7 +65,7 @@ const HeroBanner = () => {
                   {slide.desc}
                 </p>
                 <Link
-                  to="/find-partners"
+                  to={slide.link}
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-[#F97316] to-orange-600 text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
                 >
                   {slide.cta}

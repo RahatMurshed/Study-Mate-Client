@@ -79,7 +79,7 @@ useEffect(()=>{
       </div>
 
       {/* Partner Cards Grid */}
-      <div className="grid gap-3 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 gap-y-7 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {partners.length === 0 ? (
           <div className="col-span-full text-center text-base-content/70 py-8">No partners found.</div>
         ) : (

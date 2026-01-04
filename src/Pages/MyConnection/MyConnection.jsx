@@ -10,7 +10,7 @@ const MyConnections = () => {
     const { user } = use(AuthContext);
     const [connections, setConnections] = useState(null);
 
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPartner, setSelectedPartner] = useState(null);
     const [editData, setEditData] = useState({ name: "", subject: "", studyMode: "Online" });
@@ -52,14 +52,14 @@ const MyConnections = () => {
 
         try {
             await axios.patch(`/update-connection/${selectedPartner._id}`, updatedData);
-            
+
             const updated = connections.map(data => data._id === selectedPartner._id ? { ...data, ...updatedData } : data);
             setConnections(updated);
             setIsModalOpen(false);
             setSelectedPartner(null);
 
             Swal.fire({ title: 'Updated', text: 'Connection updated successfully.', icon: 'success' });
-        } 
+        }
         catch (err) {
             console.error(err);
             Swal.fire({ title: 'Error', text: 'Failed to update connection.', icon: 'error' });
@@ -82,11 +82,11 @@ const MyConnections = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                 axios.delete(`/delete-connection/${_id}`)
-         axios.patch(`/updateCount/${partnerId}`, { change: -1 })
+                axios.delete(`/delete-connection/${_id}`)
+                axios.patch(`/updateCount/${partnerId}`, { change: -1 })
 
-        const remainingConnections = connections.filter(connection => connection._id !== _id);
-        setConnections(remainingConnections)
+                const remainingConnections = connections.filter(connection => connection._id !== _id);
+                setConnections(remainingConnections)
 
 
 
@@ -98,7 +98,7 @@ const MyConnections = () => {
             }
         });
 
-        
+
 
     }
 
@@ -108,7 +108,7 @@ const MyConnections = () => {
 
 
     return (
-        <div className="min-h-screen bg-base-100 text-base-content py-10 px-4 sm:px-6 lg:px-10 mt-20">
+        <div className="min-h-screen bg-base-100 text-base-content  px-4 sm:px-6 lg:px-10 ">
             {/* --- Header --- */}
             <div className="max-w-6xl mx-auto text-center mb-8">
                 <h2 className="text-3xl font-bold flex items-center justify-center gap-3 text-base-content">
@@ -152,9 +152,11 @@ const MyConnections = () => {
                                 <td>{partner.studyMode}</td>
                                 <td className="flex flex-wrap justify-center gap-3">
                                     <button
-                                        onClick={() => { setSelectedPartner(partner);
-                                                         setEditData({ name: partner.name, subject: partner.subject, studyMode: partner.studyMode }); 
-                                                         setIsModalOpen(true); }}
+                                        onClick={() => {
+                                            setSelectedPartner(partner);
+                                            setEditData({ name: partner.name, subject: partner.subject, studyMode: partner.studyMode });
+                                            setIsModalOpen(true);
+                                        }}
                                         className="btn btn-sm rounded-lg bg-gradient-to-r from-[#F97316] to-orange-600 text-white border-none hover:from-orange-500 hover:to-[#F97316] transition-transform hover:scale-105"
                                     >
                                         <FaEdit className="text-sm" />
@@ -206,89 +208,94 @@ const MyConnections = () => {
                                 <FaEdit />
                             </button>
                             <button
-                            onClick={()=>{handleDelete(partner._id, partner.partnerId)}}
-                            className="btn btn-xs rounded-lg btn-outline border-[#F97316] text-[#F97316] hover:bg-[#F97316] hover:text-white">
+                                onClick={() => { handleDelete(partner._id, partner.partnerId) }}
+                                className="btn btn-xs rounded-lg btn-outline border-[#F97316] text-[#F97316] hover:bg-[#F97316] hover:text-white">
                                 <FaTrashAlt />
                             </button>
                         </div>
-                
+
                     </div>
-                    
-                 
+
+
                 ))}
             </div>
 
-                       {/* --- Update Modal --- */}
-                
-                    
-                            {isModalOpen && selectedPartner && (
-                                <dialog open className="modal modal-bottom sm:modal-middle">
-                                    <div className="modal-box bg-base-100 border border-base-300 max-w-md sm:max-w-lg">
-                                        <h3 className="font-bold text-lg mb-4 text-base-content">
-                                            Update Partner Info
-                                        </h3>
+            {/* --- Update Modal --- */}
 
-                                        <form onSubmit={handleUpdateConnection} className="space-y-4">
-                                            <div>
-                                                <label className="block text-sm mb-2">Name</label>
-                                                <input
-                                                    type="text"
-                                                    name="name"
-                                                    value={editData.name}
-                                                    onChange={(e) => setEditData(prevData => ({ ...prevData, name: e.target.value }))}
-                                                    className="input input-bordered w-full focus:border-[#F97316] focus:outline-none"
-                                                    placeholder="Edit partner name"
-                                                />
-                                            </div>
 
-                                            <div>
-                                                <label className="block text-sm mb-2">Subject</label>
-                                                <input
-                                                    type="text"
-                                                    name="subject"
-                                                    value={editData.subject}
-                                                    onChange={(e) => setEditData(prevData => ({ ...prevData, subject: e.target.value }))}
-                                                    className="input input-bordered w-full focus:border-[#F97316] focus:outline-none"
-                                                    placeholder="Edit subject"
-                                                />
-                                            </div>
+            {isModalOpen && selectedPartner && (
+                <dialog open className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box bg-base-100 border border-base-300 max-w-md sm:max-w-lg">
+                        <h3 className="font-bold text-lg mb-4 text-base-content">
+                            Update Partner Info
+                        </h3>
 
-                                            <div>
-                                                <label className="block text-sm mb-2">Study Mode</label>
-                                                <select
-                                                    name="studyMode"
-                                                    value={editData.studyMode}
-                                                    onChange={(e) => setEditData(prevData => ({ ...prevData, studyMode: e.target.value }))}
-                                                    className="select select-bordered w-full focus:border-[#F97316] focus:outline-none">
-                                                    <option>Online</option>
-                                                    <option>Offline</option>
-                                                </select>
-                                            </div>
+                        <form onSubmit={handleUpdateConnection} className="space-y-4">
+                            <div>
+                                <label className="block text-sm mb-2">Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={editData.name}
+                                    onChange={(e) => setEditData(prevData => ({ ...prevData, name: e.target.value }))}
+                                    className="input input-bordered w-full focus:border-[#F97316] focus:outline-none"
+                                    placeholder="Edit partner name"
+                                />
+                            </div>
 
-                                            <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline border-[#F97316] text-[#F97316] hover:bg-[#F97316] hover:text-white"
-                                                    onClick={() => { setIsModalOpen(false); setSelectedPartner(null); }}
-                                                >
-                                                    Cancel
-                                                </button>
-                                                <button
-                                                    type="submit"
-                                                    className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-lg font-medium shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300"
-                                                >
-                                                    Save Changes
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                            <div>
+                                <label className="block text-sm mb-2">Subject</label>
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    value={editData.subject}
+                                    onChange={(e) => setEditData(prevData => ({ ...prevData, subject: e.target.value }))}
+                                    className="input input-bordered w-full focus:border-[#F97316] focus:outline-none"
+                                    placeholder="Edit subject"
+                                />
+                            </div>
 
-                                    <form method="dialog" className="modal-backdrop">
-                                        <button onClick={() => { setIsModalOpen(false); setSelectedPartner(null); }}>close</button>
-                                    </form>
-                                </dialog>
-                            )}
-                
+                            <div>
+                                <label className="block text-sm mb-2">Study Mode</label>
+                                <select
+                                    name="studyMode"
+                                    value={editData.studyMode}
+                                    onChange={(e) => setEditData(prevData => ({ ...prevData, studyMode: e.target.value }))}
+                                    className="select select-bordered w-full focus:border-[#F97316] focus:outline-none">
+                                    <option>Online</option>
+                                    <option>Offline</option>
+                                </select>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">
+                                <button
+                                    type="button"
+                                    className="btn btn-outline border-[#F97316] text-[#F97316] hover:bg-[#F97316] hover:text-white"
+                                    onClick={() => { setIsModalOpen(false); setSelectedPartner(null); }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-gradient-to-r from-[#F97316] to-orange-600 hover:from-orange-500 hover:to-[#F97316] text-white px-4 py-2 rounded-lg font-medium shadow-md shadow-[#F97316]/30 hover:shadow-[#F97316]/50 transition-all duration-300"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <form method="dialog" className="modal-backdrop">
+                        <button onClick={() => { setIsModalOpen(false); setSelectedPartner(null); }}>close</button>
+                    </form>
+                </dialog>
+            )}
+
+            {/* Footer */}
+            <footer className="py-6 border-t border-base-300 text-center text-sm text-base-content">
+                <p>© 2026 StudyMate. All Rights Reserved.</p>
+            </footer>
+
         </div>
     );
 };
